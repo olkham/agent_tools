@@ -1,115 +1,25 @@
 {
-  "board": {
-    "columns": 12,
-    "rows": 6
-  },
+  "board": {"name": "Button and LED", "columns": 14, "rows": 8},
   "components": [
-    {
-      "ref": "J1",
-      "type": "connector",
-      "pins": {
-        "VCC": {
-          "at": [
-            1,
-            1
-          ],
-          "net": "VCC"
-        },
-        "GND": {
-          "at": [
-            1,
-            4
-          ],
-          "net": "GND"
-        }
-      }
-    },
-    {
-      "ref": "R1",
-      "type": "resistor",
-      "pins": {
-        "1": {
-          "at": [
-            4,
-            1
-          ],
-          "net": "VCC"
-        },
-        "2": {
-          "at": [
-            4,
-            2
-          ],
-          "net": "LED_A"
-        }
-      }
-    },
-    {
-      "ref": "D1",
-      "type": "led",
-      "pins": {
-        "A": {
-          "at": [
-            8,
-            2
-          ],
-          "net": "LED_A"
-        },
-        "K": {
-          "at": [
-            8,
-            4
-          ],
-          "net": "GND"
-        }
-      }
-    },
-    {
-      "ref": "J2",
-      "pins": {
-        "SIG": {
-          "at": [
-            10,
-            1
-          ],
-          "net": "SIG"
-        }
-      }
-    },
-    {
-      "ref": "TP1",
-      "pins": {
-        "1": {
-          "at": [
-            5,
-            3
-          ],
-          "net": "SIG"
-        }
-      }
-    }
+    {"ref": "J1", "type": "header", "value": "1x5 pin header", "footprint": "header", "at": [0, 0], "rotation": 90,
+     "pins": 5, "pin_names": ["GND", "VCC", "LED", "SPARE", "BTN"],
+     "nets": {"GND": "GND", "VCC": "VCC", "LED": "LED", "BTN": "BTN", "SPARE": "NC"}},
+    {"ref": "R1", "type": "resistor", "value": "330R", "part": "1/4 W metal film",
+     "footprint": "axial", "at": [2, 2], "span": 4, "nets": {"1": "LED", "2": "LED_A"}},
+    {"ref": "D1", "type": "led", "value": "red 5 mm", "footprint": "radial", "at": [8, 2], "rotation": 90,
+     "nets": {"A": "LED_A", "K": "GND"}},
+    {"ref": "R2", "type": "resistor", "value": "10k", "footprint": "axial", "at": [12, 1], "rotation": 90, "span": 4,
+     "nets": {"1": "VCC", "2": "BTN"}},
+    {"ref": "D2", "type": "diode", "value": "1N4148", "description": "clamps BTN to VCC",
+     "footprint": "axial", "at": [11, 5], "rotation": 270, "span": 4, "nets": {"A": "BTN", "K": "VCC"}},
+    {"ref": "SW1", "type": "switch", "value": "6x6 mm tactile", "footprint": "tactile", "at": [4, 5], "rotation": 90,
+     "nets": {"1": "BTN", "3": "GND"}},
+    {"ref": "TP1", "type": "testpoint", "pins": {"1": {"at": [13, 5], "net": "BTN"}}}
   ],
-  "cuts": [],
+  "cuts": [{"between": [4, 2]}],
   "links": [
-    {
-      "from": [
-        10,
-        1
-      ],
-      "to": [
-        10,
-        3
-      ]
-    },
-    {
-      "from": [
-        10,
-        3
-      ],
-      "to": [
-        5,
-        3
-      ]
-    }
+    {"from": [10, 3], "to": [10, 0], "color": "black"},
+    {"from": [2, 4], "to": [2, 5], "net": "BTN", "color": "yellow"},
+    {"from": [9, 7], "to": [9, 3], "color": "black"}
   ]
 }
