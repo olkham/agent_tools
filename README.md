@@ -11,3 +11,4 @@ Small, self-contained tools written with (and for) coding agents. Each tool live
 | Tool | What it does |
 |---|---|
 | [hardware/breadboard](hardware/breadboard/) | Generates a checked breadboard layout (SVG/PNG) and hole-by-hole build steps from a parts + netlist description. |
+| [hardware/stripboard](hardware/stripboard/) | Produces mirrored component/copper-side Veroboard layouts with component positions, track cuts, jumpers and electrical validation. |
