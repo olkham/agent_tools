@@ -189,11 +189,12 @@ def expand_footprint(c, ref, t):
     elif fp == "tactile":
         # 6x6 mm switch: real pitch 6.5 x 4.5 mm, approximated as 3 holes across x 2 holes along.
         add("1", 1, 0, 0)
-        add("2", 2, 0, 3)
+        # The joined pairs sit on the same side as a DIP's second row, so rotation works the same way.
+        add("2", 2, 0, -3)
         add("3", 3, 2, 0)
-        add("4", 4, 2, 3)
+        add("4", 4, 2, -3)
         bridges = [["1", "2"], ["3", "4"]]
-        shape = {"kind": "rect", "style": "tactile", "box": (1 - 1.18, 1.5 - 1.18, 1 + 1.18, 1.5 + 1.18), "c": (1, 1.5)}
+        shape = {"kind": "rect", "style": "tactile", "box": (1 - 1.18, -1.5 - 1.18, 1 + 1.18, -1.5 + 1.18), "c": (1, -1.5)}
     else:
         raise ValueError(f"{ref}: unknown footprint {fp!r}; use one of {', '.join(FOOTPRINTS)}")
     return {"pins": pins, "bridges": bridges, "shape": shape, "labels": labels}
@@ -693,7 +694,8 @@ def build(data, *, auto_cuts=False, cut_style="prefer-hole", netlist=None, netli
     def add_no_beep(pa, pb, why):
         ra, rb = find(pa), find(pb)
         la, lb = cl_label(ra), cl_label(rb)
-        if ra == rb or not la or not lb or (la == lb and la != "NC") or (why.startswith("adjacent") and (ra, rb) in seen):
+        # two unconnected (NC) sides touching harms nothing, so only checks with a real net on one side are listed
+        if ra == rb or not la or not lb or la == lb or (why.startswith("adjacent") and (ra, rb) in seen):
             return
         seen.add((ra, rb))
         no_beep.append({"a": hole_name(pa), "b": hole_name(pb), "nets": [la, lb], "why": why})

@@ -12,7 +12,7 @@
      "nets": {"1": "VCC", "2": "BTN"}},
     {"ref": "D2", "type": "diode", "value": "1N4148", "description": "clamps BTN to VCC",
      "footprint": "axial", "at": [11, 5], "rotation": 270, "span": 4, "nets": {"A": "BTN", "K": "VCC"}},
-    {"ref": "SW1", "type": "switch", "value": "6x6 mm tactile", "footprint": "tactile", "at": [7, 5], "rotation": 90,
+    {"ref": "SW1", "type": "switch", "value": "6x6 mm tactile", "footprint": "tactile", "at": [4, 5], "rotation": 90,
      "nets": {"1": "BTN", "3": "GND"}},
     {"ref": "TP1", "type": "testpoint", "pins": {"1": {"at": [13, 5], "net": "BTN"}}}
   ],

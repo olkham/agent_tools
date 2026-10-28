@@ -152,17 +152,17 @@ class FootprintTests(unittest.TestCase):
 
     def test_tactile_bridges(self):
         data = {"board": {"columns": 12, "rows": 8}, "components": [
-            {"ref": "SW1", "footprint": "tactile", "at": [2, 1], "nets": {"1": "BTN", "3": "GND"}},
-            {"ref": "J1", "pins": {"1": {"at": [0, 4], "net": "BTN"}, "2": {"at": [9, 1], "net": "GND"}}}]}
+            {"ref": "SW1", "footprint": "tactile", "at": [2, 4], "nets": {"1": "BTN", "3": "GND"}},
+            {"ref": "J1", "pins": {"1": {"at": [0, 1], "net": "BTN"}, "2": {"at": [9, 4], "net": "GND"}}}]}
         r = run(data, auto_cuts=True)
-        self.assertEqual([pin_at(r, f"SW1.{i}") for i in "1234"], [(2, 1), (2, 4), (4, 1), (4, 4)])
+        self.assertEqual([pin_at(r, f"SW1.{i}") for i in "1234"], [(2, 4), (2, 1), (4, 4), (4, 1)])
         self.assertTrue(r["valid"], r)                       # J1.1 reaches SW1.1 only through the 1-2 bridge
         self.assertEqual(r["pins"]["SW1.2"]["net"], "BTN")
         self.assertTrue(r["pins"]["SW1.2"]["net_inherited_from_bridge"])
         self.assertEqual([b["pins"] for b in r["bridges"]], [["1", "2"], ["3", "4"]])
         rot = run({"board": {"columns": 12, "rows": 8}, "components": [
-            {"ref": "SW1", "footprint": "tactile", "at": [5, 1], "rotation": 90, "nets": {"1": "BTN", "3": "GND"}}]})
-        self.assertEqual([pin_at(rot, f"SW1.{i}") for i in "1234"], [(5, 1), (2, 1), (5, 3), (2, 3)])
+            {"ref": "SW1", "footprint": "tactile", "at": [2, 1], "rotation": 90, "nets": {"1": "BTN", "3": "GND"}}]})
+        self.assertEqual([pin_at(rot, f"SW1.{i}") for i in "1234"], [(2, 1), (5, 1), (2, 3), (5, 3)])
         self.assertTrue(rot["valid"])                         # rotated: each joined pair on one strip, no cut
 
     def test_generic_bridges(self):

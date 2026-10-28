@@ -67,7 +67,7 @@ Common fields: `ref` (unique), `type` (e.g. `resistor`, `diode`, `led`, `ic`), a
 | `header` | `pins` (count), optional `pin_names`, `female` (drawing only) | 1..N along the row; keys are `pin_names` if given. Pin 1 is drawn square. |
 | `dip` | `pins` (even), `row_spacing` (default 3 = 0.3"), optional `pin_names` | 1..N/2 along the row, then N/2+1..N back along the second row (counter-clockwise from above, notch at the pin-1 end) |
 | `module` | `row_spacing` (e.g. 9 = 0.9"), `left`/`right` pin-name lists from the origin end (`null` = no pin), optional `body` `{extend_start, extend_end, extend_left, extend_right}` in holes, `label`, `numbering` | left row from `at`; right row parallel, `row_spacing` away |
-| `tactile` | none | `1` +0, `3` +2 along; `2`, `4` 3 holes across. 1-2 and 3-4 are joined inside. |
+| `tactile` | none | `1` +0, `3` +2 along; `2`, `4` 3 holes across on the second-row side (like a DIP: above at rotation 0, to the right at 90). 1-2 and 3-4 are joined inside. |
 
 **Rotation** turns the footprint clockwise as seen in the component-side view. The direction pins advance (header 1→N, DIP pin 1→N/2, module rows, axial pin 1→2) is:
 
